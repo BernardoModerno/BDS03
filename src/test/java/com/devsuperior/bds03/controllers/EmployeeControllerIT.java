@@ -28,7 +28,6 @@ public class EmployeeControllerIT {
 	
 	@Autowired
 	private ObjectMapper objectMapper;
-	
 	@Autowired
 	private TokenUtil tokenUtil;
 	
@@ -125,7 +124,7 @@ public class EmployeeControllerIT {
 	public void insertShouldReturn422WhenAdminLoggedAndInvalidEmail() throws Exception {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
-
+		
 		EmployeeDTO dto = new EmployeeDTO(null, "Joaquim", "joaquim@", 1L);
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
@@ -140,7 +139,7 @@ public class EmployeeControllerIT {
 		result.andExpect(jsonPath("$.errors[0].fieldName").value("email"));
 		result.andExpect(jsonPath("$.errors[0].message").value("Email inválido"));
 	}
-
+	
 	@Test
 	public void insertShouldReturn422WhenAdminLoggedAndNullDepartment() throws Exception {
 
